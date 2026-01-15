@@ -1,0 +1,176 @@
+info: Technical Itinerary
+title: Upcoming Event Schedule
+# Events Details Labels
+agenda: "Session Agenda"
+session: "Session Speakers"
+about: "About this Session"
+artilce: "Detailed"
+
+schedule:
+  - sort: "01"
+    date: "January 01, 2026"
+    time: "09:00 AM - 11:00 AM"
+    start: 
+       date: "2026-01-01"
+       time: "09:00:00"
+    end:  
+       date: "2026-01-01"
+       time: "11:00:00"
+    speaker: 
+      - name: "Dr. Raymond Vance"
+        type: "keynote"
+      - name: "Prof. Sarah Jenkins"
+        type: "plenary"
+    title: "Global Commerce Kickoff 2026"
+    image: "https://i.pravatar.cc/1200?u=c2"
+    description: "Sesi pembukaan tahunan untuk strategi pasar global Zetta Core."
+    content: |
+      ### Strategi Pasar Global 2026
+      Sesi ini mencakup evaluasi menyeluruh terhadap pencapaian tahun 2025 dan penetapan target untuk tahun 2026.
+      * Analisis kompetitor global.
+      * Optimasi *supply chain* digital.
+      * Implementasi AI dalam *customer experience*.
+    list: |
+      * **09.00 AM** - Strategi Ekspansi Wilayah Asia
+      * **10.00 AM** - Diskusi Panel: Masa Depan E-commerce
+      * **10.45 AM** - Penutupan & Doa
+    article: |
+      ### Strategi Pasar Global 2026
+      Sesi ini mencakup evaluasi menyeluruh terhadap pencapaian tahun 2025 dan penetapan target untuk tahun 2026.
+      * Analisis kompetitor global.
+      * Optimasi *supply chain* digital.
+      * Implementasi AI dalam *customer experience*.
+
+  - sort: "02"
+    date: "January 17, 2026"
+    time: "08:00 PM - 10:00 PM"
+    start: 
+       date: "2026-01-14"
+       time: "20:00:00"
+    end:  
+       date: "2026-01-14"
+       time: "22:00:00"
+    speaker: 
+      - name: "Dr. Raymond Vance"
+        type: "keynote"
+      - name: "Prof. Sarah Jenkins"
+        type: "plenary"
+    title: "Pre-Event: Networking Night"
+    image: "https://i.pravatar.cc/1200?u=k5"
+    description: "Malam keakraban bagi para partner Axcora Commerce Pro."
+    content: |
+      #### Networking Eksklusif
+      Bergabunglah dalam malam santai di **Zetta Core Lounge**. Ini adalah kesempatan terbaik untuk membangun relasi sebelum acara utama dimulai.
+      > "Koneksi adalah mata uang baru dalam bisnis global."
+    list: |
+      * **08.00 PM** - Welcome Drink & Registration
+      * **09.00 PM** - Interactive Networking Session
+      * **10.00 PM** - Closing Remarks
+    article: |
+      ### Strategi Pasar Global 2026
+      Sesi ini mencakup evaluasi menyeluruh terhadap pencapaian tahun 2025 dan penetapan target untuk tahun 2026.
+      * Analisis kompetitor global.
+      * Optimasi *supply chain* digital.
+      * Implementasi AI dalam *customer experience*.
+
+  - sort: "03"
+    date: "January 18, 2026"
+    time: "08:00 AM - 09:00 PM"
+    start: 
+       date: "2026-01-15"
+       time: "08:00:00"
+    end:  
+       date: "2026-01-15"
+       time: "21:00:00"
+    speaker: 
+      - name: "Dr. Raymond Vance"
+        type: "keynote"
+      - name: "Prof. Sarah Jenkins"
+        type: "plenary"
+    title: "Plenary Talk: Future of Faith"
+    image: "https://i.pravatar.cc/1200?u=w5"
+    description: "An in-depth look at the evolving role of faith in modern society."
+    content: |
+      ## Faith & Technology
+      This session explores how **digital transformation** affects traditional faith practices. 
+      We will discuss:
+      1. Digital places of worship.
+      2. The ethics of AI in spiritual guidance.
+      3. Global connectivity vs Local traditions.
+    list: |
+      * **12.00 PM** - Opening Remarks by Prof. Sarah Jenkins
+      * **12.30 PM** - Keynote Speech: *The Digital Soul*
+      * **01.30 PM** - Q&A Session with Speakers
+    article: |
+      ### Strategi Pasar Global 2026
+      Sesi ini mencakup evaluasi menyeluruh terhadap pencapaian tahun 2025 dan penetapan target untuk tahun 2026.
+      * Analisis kompetitor global.
+      * Optimasi *supply chain* digital.
+      * Implementasi AI dalam *customer experience*.
+
+  - sort: "04"
+    date: "January 19, 2026"
+    time: "10:30 AM - 12:00 PM"
+    start: 
+       date: "2026-01-18"
+       time: "10:30:00"
+    end:  
+       date: "2026-01-18"
+       time: "12:00:00"
+    speaker: 
+      - name: "Dr. Raymond Vance"
+        type: "keynote"
+      - name: "Prof. Sarah Jenkins"
+        type: "plenary"
+    title: "Workshop: Social Impact"
+    image: "https://i.pravatar.cc/1200?u=s5"
+    description: "Workshop on creating tangible social changes."
+    content: |
+      ### Social Impact Workshop
+      Fokus pada pembangunan komunitas dan pengukuran dampak nyata dari inisiatif sosial Anda.
+      - Metodologi **SROI** (Social Return on Investment).
+      - Studi kasus keberhasilan di Afrika dan Asia Tenggara.
+    list: |
+      * **10.30 AM** - Intro to Social Impact Frameworks
+      * **11.15 AM** - Case Studies & Group Discussion
+      * **11.45 AM** - Action Plan Development
+    article: |
+      ### Strategi Pasar Global 2026
+      Sesi ini mencakup evaluasi menyeluruh terhadap pencapaian tahun 2025 dan penetapan target untuk tahun 2026.
+      * Analisis kompetitor global.
+      * Optimasi *supply chain* digital.
+      * Implementasi AI dalam *customer experience*.
+
+  - sort: "05"
+    date: "February 01, 2026"
+    time: "01:00 PM - 03:00 PM"
+    start: 
+       date: "2026-02-01"
+       time: "13:00:00"
+    end:  
+       date: "2026-02-01"
+       time: "15:00:00"
+    speaker: 
+      - name: "Dr. Raymond Vance"
+        type: "keynote"
+      - name: "Prof. Sarah Jenkins"
+        type: "plenary"
+    title: "Backend Scalability Mastery"
+    image: "https://i.pravatar.cc/1200?u=d5"
+    description: "Deep dive into scalable database architecture for global markets."
+    content: |
+      # Mastering Scalability
+      Pelajari cara membangun sistem yang menangani jutaan transaksi dengan **Zetta Core Architecture**.
+      - Database Sharding.
+      - Load Balancing Strategy.
+      - **Cashflow Integration** Security.
+    list: |
+      * **01.00 PM** - Database Sharding Techniques
+      * **02.00 PM** - High Availability & Disaster Recovery
+      * **02.45 PM** - Live Demo: Scaling under load
+    article: |
+      ### Strategi Pasar Global 2026
+      Sesi ini mencakup evaluasi menyeluruh terhadap pencapaian tahun 2025 dan penetapan target untuk tahun 2026.
+      * Analisis kompetitor global.
+      * Optimasi *supply chain* digital.
+      * Implementasi AI dalam *customer experience*.

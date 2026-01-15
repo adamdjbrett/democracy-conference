@@ -1,0 +1,118 @@
+<div class="col-md-6 mb-4">
+    <div class="press-card p-4 bg-white h-100 position-relative d-flex flex-column">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <!-- 
+            <span class="badge-category text-uppercase p-1" @raw="md(type)"></span>
+            -->
+            <template webc:type="11ty" 11ty:type="njk">
+                {% for tag in tags %}
+                    {% if tag != "press" %}
+                        <span class="tag-item">#{{ tag }}</span>
+                    {% endif %}
+                {% endfor %}
+            </template>
+        </div>
+        
+        <h3 class="h4 fw-bold mb-3 title-link">
+            <a :href="url" class="text-decoration-none text-dark stretched-link" 
+            @raw="md(title)"></a>
+        </h3>
+        <img class="img-post" :alt="title" :src="image" webc:if="image"/>
+        <div class="description-text mb-4" @raw="md(description)"></div>
+        
+        <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top-light">
+            <div class="d-flex align-items-center">
+                <i class="far fa-calendar-alt me-2 text-gold"></i>
+                <small class="text-muted fw-semibold" @raw="date.toDateString()"></small>
+            </div>
+            <span class="read-more-text fw-bold">
+                READ STORY <span class="arrow">&rarr;</span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<style webc:keep>
+    /* Zetta Core: Press Card Styling */
+    .press-card {
+        border-radius: 12px;
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+        border-left: 5px solid var(--uls-maroon);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        z-index: 1;
+    }
+
+    .img-post {width:100%; height:220px; object-fit:cover;}
+
+    .press-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(128, 0, 0, 0.1);
+        border-color: rgba(128, 0, 0, 0.2);
+    }
+
+    /* Category Badge */
+    .badge-category {
+        background-color: var(--uls-maroon);
+        color: white;
+        padding: 4px 12px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        border-radius: 4px;
+    }
+
+    /* Tags Styling */
+    .tag-item {
+        font-size: 0.7rem;
+        color: #856440; /* Gold-Brown */
+        font-weight: 600;
+        background: rgba(133, 100, 64, 0.05);
+        padding: 2px 8px;
+        border-radius: 20px;
+    }
+
+    /* Title & Description */
+    .title-link a {
+        transition: color 0.3s ease;
+        line-height: 1.4;
+    }
+
+    .press-card:hover .title-link a {
+        color: var(--uls-maroon) !important;
+    }
+
+    .description-text {
+        font-size: 0.9rem;
+        color: #666;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Footer Details */
+    .border-top-light {
+        border-top: 1px solid #f1f1f1;
+    }
+
+    .text-gold {
+        color: var(--uls-gold);
+    }
+
+    .read-more-text {
+        font-size: 0.75rem;
+        color: var(--uls-maroon);
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+    }
+
+    .arrow {
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+
+    .press-card:hover .arrow {
+        transform: translateX(5px);
+    }
+</style>

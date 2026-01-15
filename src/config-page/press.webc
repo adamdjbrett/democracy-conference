@@ -1,0 +1,158 @@
+---js
+{
+  layout: "layouts/base.webc",
+  title: "Press & News",
+  description: "Latest updates and official announcements from ULS International Conference 2026.",
+  pagination: {
+    data: "collections.press",
+    size: 9,
+    alias: "newsList",
+    reverse: true 
+  },
+  permalink: (data) => {
+    const p = data.pagination.pageNumber;
+    return `press/${p > 0 ? (p + 1) + '/' : ''}index.html`;
+  }
+}
+---
+
+<section class="py-5 mt-5">
+    <div class="container">
+        <header class="mb-5 pb-4 border-bottom">
+            <div class="row align-items-end g-4">
+                <div class="col-md-8">
+                    <h1 class="text-maroon fw-bold text-uppercase ls-2 mb-2 lead">Media Center</h1>
+                    <h2 class="display-3 fw-bold heading-font mb-0" @text="title"></h2>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <p class="text-muted small mb-0" @text="description"></p>
+                </div>
+            </div>
+        </header>
+
+        <div class="row g-4">
+            <div webc:for="news of newsList" class="col-md-6 col-lg-4">
+                <article class="card h-100 border-0 shadow-sm overflow-hidden news-card bg-white">
+                    <div class="position-relative overflow-hidden">
+                        <img :src="news.data.image || 'https://images.unsplash.com/photo-1504711432869-efd597cdd04d?auto=format&fit=crop&w=800&q=80'" 
+                             class="card-img-top news-thumb" 
+                             :alt="news.data.title">
+                       <span class="top-0 start-0 m-3 badge bg-maroon-glass px-3 py-2 rounded-pill shadow-sm" 
+                        style="z-index: 2;" 
+                        @text="(news.data.tags ? news.data.tags.filter(t => t !== 'press')[0] : null) || 'Updates'">
+                    </span>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-gold me-2">
+                                <template webc:type="js" webc:raw>renderIcon('fas', 'calendar-alt', 'small');</template>
+                            </span>
+                            <small class="fw-bold text-muted text-uppercase" 
+                                   @text="news.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })">
+                            </small>
+                        </div>
+                        
+                        <h2 class="h4 fw-bold mb-3 heading-font">
+                            <a :href="news.url" class="text-decoration-none text-dark stretched-link hover-maroon" @text="news.data.title"></a>
+                        </h2>
+                        
+                        <p class="card-text text-secondary mb-0 text-truncate-3" @text="news.data.description"></p>
+                    </div>
+
+                    <div class="card-footer bg-white border-0 px-4 pb-4">
+                        <span class="text-maroon fw-bold small text-uppercase ls-1">Read Article <i class="fas fa-arrow-right ms-1"></i></span>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <nav webc:if="pagination.pages.length > 1" class="mt-5 pt-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4 p-4 rounded-4 bg-light shadow-inner">
+                <div class="order-2 order-md-1">
+                    <a webc:if="pagination.href.previous" :href="pagination.href.previous" class="btn btn-maroon px-4 py-2 rounded-pill shadow-maroon fw-bold">
+                        <template webc:type="js" webc:raw>renderIcon('fas', 'chevron-left', 'me-2');</template> Newer Posts
+                    </a>
+                </div>
+
+                <div class="order-1 order-md-2 text-center">
+                    <span class="text-muted small text-uppercase ls-2">Journal Archives</span>
+                    <div class="fw-bold h5 mb-0 mt-1">
+                        <span class="text-maroon" @text="pagination.pageNumber + 1"></span> 
+                        <span class="text-muted mx-2">/</span> 
+                        <span @text="pagination.pages.length"></span>
+                    </div>
+                </div>
+
+                <div class="order-3">
+                    <a webc:if="pagination.href.next" :href="pagination.href.next" class="btn btn-outline-dark px-4 py-2 rounded-pill fw-bold border-2">
+                        Older Posts <template webc:type="js" webc:raw>renderIcon('fas', 'chevron-right', 'ms-2');</template>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<style webc:nokeep>
+    :root {
+        --uls-maroon: #800000;
+        --uls-gold: #d4af37;
+    }
+
+    .heading-font { font-family: 'Playfair Display', serif; }
+    .text-maroon { color: var(--uls-maroon) !important; }
+    .text-gold { color: var(--uls-gold) !important; }
+    .ls-2 { letter-spacing: 2px; }
+
+    .news-card {
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+
+    .news-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+    }
+
+    .news-thumb {
+        height: 240px;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .news-card:hover .news-thumb {
+        transform: scale(1.05);
+    }
+
+    .bg-maroon-glass {
+        background: rgba(128, 0, 0, 0.85);
+        backdrop-filter: blur(4px);
+        color: white;
+    }
+
+    .hover-maroon:hover {
+        color: var(--uls-maroon) !important;
+    }
+
+    .text-truncate-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .shadow-maroon {
+        box-shadow: 0 4px 14px 0 rgba(128, 0, 0, 0.2);
+    }
+
+    .shadow-inner {
+        box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-maroon {
+        background: var(--uls-maroon);
+        border: none;
+        color: white;
+    }
+</style>

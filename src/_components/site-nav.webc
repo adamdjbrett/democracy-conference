@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg sticky-top bg-white" aria-label="Main nav">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" :href="metadata.url">
+            <img :src="config.nav.logo" alt="Logo" class="mb-4 img-thumb me-3" webc:if="config?.nav.logo" webc:keep>
+            <span class="fw-bold" @raw="config.nav.brand"></span>
+        </a>
+       <button 
+    class="navbar-toggler" 
+    type="button" 
+    data-bs-toggle="collapse" 
+    data-bs-target="#navbarNav" 
+    aria-controls="navbarNav" 
+    aria-expanded="false" 
+    aria-label="Toggle navigation menu">
+    <span class="navbar-toggler-icon"></span>
+</button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto text-uppercase">
+                <li class="nav-item" webc:for="link of config.nav.links">
+                    <a class="nav-link" :href="link.url" @raw="link.name"></a>
+                </li>
+            </ul>
+            <a :href="config.nav.button.url" target="_blank" rel="noopener"
+            class="btn-nav-reg ms-lg-4 text-uppercase" 
+            @html="config.nav.button.text"></a>
+        </div>
+    </div>
+</nav>
+
+<style webc:nokeep>
+    .brand-box { width: 40px; height: 40px; background: var(--uls-maroon); margin-right: 10px; }
+    .navbar { padding: 1.2rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .nav-link { font-size: 0.85rem; letter-spacing: 1px; font-weight: 600; color: #333 !important; text-decoration: none; }
+    .btn-nav-reg { font-size: 0.75rem; font-weight: 
+    bold; padding: 8px 20px; border: 1px solid var(--uls-maroon); 
+    background-color: var(--uls-maroon) !important; color:white; 
+    text-decoration: none; }
+</style>

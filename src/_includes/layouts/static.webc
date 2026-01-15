@@ -1,0 +1,55 @@
+---js
+{
+  layout: "layouts/base.webc"
+}
+---
+<article class="static-page-wrapper py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <header class="text-center mb-5">
+                    <h1 class="display-3 fw-bold heading-font mb-3" @text="title"></h1>
+                    <div class="divider-gold mx-auto"></div>
+                </header>
+
+                <div class="mb-5 shadow-lg rounded-4 overflow-hidden" webc:if="image">
+                    <img :src="image" :alt="title" class="img-fluid w-100" style="max-height: 450px; object-fit: cover;">
+                </div>
+
+                <div class="static-content rich-text lh-lg" @raw="content"></div>
+                
+                <div class="mt-5 pt-4 border-top text-center">
+                    <a href="/" class="btn btn-outline-maroon rounded-pill px-4 fw-bold">
+                        <i class="fas fa-home me-2"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<style webc:nokeep>
+    .divider-gold {
+        width: 80px;
+        height: 4px;
+        background: var(--uls-gold);
+        border-radius: 2px;
+    }
+    .static-content {
+        font-size: 1.1rem;
+        color: #333;
+    }
+    .static-content h2 { 
+        margin-top: 2rem; 
+        color: var(--uls-maroon); 
+        font-weight: 700;
+    }
+    .btn-outline-maroon {
+        border: 2px solid var(--uls-maroon);
+        color: var(--uls-maroon);
+    }
+    .btn-outline-maroon:hover {
+        background: var(--uls-maroon);
+        color: white;
+    }
+</style>

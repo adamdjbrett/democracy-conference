@@ -1,0 +1,32 @@
+hero:
+  subtitle: "January 2026 • Philadelphia"
+  title: "Shaping Tomorrow's <br><em>Theological Landscape</em>"
+  description: "A premier gathering of leaders, scholars, and practitioners."
+  cta_text: "Join The Event"
+  cta_link: "/events/"
+
+about:
+  vision: "Our Vision"
+  title: "About the Conference"
+  content: |
+      Welcome to <strong>Axcora Event 2026</strong>. This conference serves as a global bridge for <u>academic discourse</u> and community leadership.
+
+  quote: "The best way to predict the future of the seminary is to create it through collaborative dialogue."
+
+contact: 
+  title: Contact
+  text:  Have questions about the event or registration?
+  list: 
+  - name: Email
+    text: "info@adamdjbrett.com"
+    link: "mailto:info@adamdjbrett.com"
+  - name: "Phone"
+    text: " +1 (215) 555-0123"
+    link: "tel:+12155550123"
+
+
+registration:
+  title: "Reserve Your Spot"
+  description: "Tickets are limited. Secure your registration today."
+  cta_text: "Register Here"
+  registration_link: "https://www.unitedlutheranseminary.edu/register"

@@ -1,0 +1,28 @@
+<section id="contact" class="py-5 bg-cream">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8 mx-auto text-center py-5" id="register-section">
+                <div class="registration-box p-5 border-2">
+                    <h3 class="fw-bold mb-4" @raw="design.registration.title"></h3>
+                    <p class="mb-4" @raw="design.registration.description"></p>
+                    <a :href="design.registration.registration_link" class="btn-register text-uppercase" @raw="design.registration.cta_text"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style webc:nokeep>
+    .bg-cream { background-color: var(--uls-cream) !important; }
+    .registration-box { border: 2px dashed var(--uls-maroon) !important; background: white; }
+    .btn-register {
+        background-color: var(--uls-maroon);
+        color: white;
+        padding: 15px 40px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        border: 2px solid var(--uls-maroon);
+    }
+    .btn-register:hover { background: transparent; color: var(--uls-maroon); }
+</style>

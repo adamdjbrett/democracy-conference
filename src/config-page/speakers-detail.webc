@@ -1,0 +1,120 @@
+---js
+{
+  pagination: {
+    data: "speakers.list",
+    size: 1,
+    alias: "speaker",
+    addAllPagesToCollections: true
+  },
+  permalink: (data) => `/speakers/${data.slugify(data.speaker.name)}/index.html`,
+  layout: "layouts/base.webc"
+}
+---
+<div class="container py-4 mt-5">
+    <div class="row align-items-start g-5">
+        <div class="col-md-4 text-center" style="top: 2rem;">
+            <div class="position-relative d-inline-block">
+                <img :src="speaker.img" :alt="speaker.name" 
+                     class="img-fluid rounded-circle shadow-lg profile-img-accent" 
+                     style="width: 280px; height: 280px; object-fit: cover;">
+                <div class="position-absolute bottom-0 end-0 bg-gold p-3
+                 rounded-circle shadow-sm border border-4 border-white">
+                    <i class="fas fa-microphone text-white"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb custom-breadcrumb">
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted small">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/speakers/" class="text-decoration-none text-muted small">Speakers</a></li>
+                    <li class="breadcrumb-item active text-maroon fw-bold small" aria-current="page" @text="speaker.name"></li>
+                </ol>
+            </nav>
+
+            <h1 class="display-4 fw-bold mb-1 text-dark heading-font" @raw="speaker.name"></h1>
+            <h2 class="text-maroon fw-bold mb-4 ls-1 lead" @raw="speaker.role"></h2>
+            
+            <div class="bio-box ps-4 py-2 mb-4" @raw="speaker.bio"></div>
+
+<div class="mt-3 mb-4 d-flex gap-2">
+    <template webc:type="js" webc:raw>
+        let linksHtml = "";
+        if (speaker.links && speaker.links.length > 0) {
+            speaker.links.forEach(link => {
+                // Tentukan prefix berdasarkan nama/icon
+                const isBrand = ['linkedin', 'twitter', 'x', 'facebook', 'instagram'].includes(link.name.toLowerCase());
+                const type = isBrand ? 'fab' : 'fas';
+                
+                // PANGGIL FUNGSI renderIcon milik Senior
+                // iconHandler(type, name, classNames)
+                const svgIcon = renderIcon(type, link.icon || link.name, "me-1");
+                
+                linksHtml += `
+                    <a href="${link.url}" target="_blank" 
+                       class="btn btn-sm btn-light border rounded-pill px-3 text-dark shadow-sm d-inline-flex align-items-center"
+                       style="font-size: 0.75rem; letter-spacing: 0.5px;">
+                        ${svgIcon} ${link.name.toUpperCase()}
+                    </a>`;
+            });
+        }
+        linksHtml;
+    </template>
+</div>
+
+            <div class="content-section mt-4" webc:if="speaker.content">
+                <h3 class="fw-bold text-uppercase small text-muted mb-3 spacing-2 border-bottom pb-2">Professional Background</h3>
+                <div @raw="md(speaker.content)" class="text-secondary lh-lg mb-0"></div>
+            </div>
+
+            <div class="mt-5 d-flex flex-wrap gap-3">
+                <a href="/#schedule" class="btn btn-maroon px-4 py-2 rounded-pill shadow-maroon fw-bold">
+                   <i class="fas fa-calendar-alt me-2"></i> View Schedule
+                </a>
+                <a href="/speakers/" class="btn btn-outline-dark px-4 py-2 rounded-pill fw-bold">
+                    All Speakers
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style webc:nokeep>
+    :root {
+        --uls-maroon: #800000;
+        --uls-gold: #d4af37;
+    }
+
+    .heading-font { font-family: 'Playfair Display', serif; }
+    .text-maroon { color: var(--uls-maroon) !important; }
+    .bg-gold { background-color: var(--uls-gold) !important; }
+
+    /* Compact Profile Accent */
+    .profile-img-accent {
+        border: 8px solid white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    }
+
+    .bio-box {
+        border-left: 4px solid var(--uls-maroon);
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #333;
+        background: linear-gradient(90deg, rgba(128,0,0,0.03) 0%, transparent 100%);
+    }
+
+    /* Button Tightening */
+    .btn-maroon, .btn-outline-dark { font-size: 0.9rem; transition: 0.2s; }
+    .btn-maroon:hover { background: #600000; color:white; transform: translateY(-1px); }
+.btn-maroon { background-color: #7f0c0c; color:white; }    
+    /* Reduce vertical footprint */
+    .container { margin-bottom: 0 !important; }
+    .content-section p:last-child { margin-bottom: 0; }
+
+    main { animation: fadeIn 0.4s ease-out; }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+</style>

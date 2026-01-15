@@ -1,0 +1,118 @@
+---js
+{
+  "title": "World-Class Speakers",
+  "description": "Meet the thought leaders and innovators of Speakers 2026.",
+  "permalink": "/speakers/index.html",
+  "layout": "layouts/base.webc"
+}
+---
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="text-center mb-5 pb-3">
+            <h1 class="lead text-maroon fw-bold text-uppercase ls-2 mb-2" @text="speakers.info"></h1>
+            <h2 class="display-4 fw-bold heading-font mb-3" @text="speakers.title"></h2>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;" @text="speakers.text"></p>
+            <div class="mx-auto mt-3" style="width: 80px; height: 4px; background: var(--uls-gold);"></div>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <template webc:type="js" webc:raw>
+                const list = (this.speakers && this.speakers.list) ? this.speakers.list : [];
+                let out = "";
+                list.forEach(spk => {
+                    const slug = slugify(spk.name);
+                    out += `
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="speaker-card card h-100 border-0 shadow-sm overflow-hidden bg-white">
+                            <div class="position-relative overflow-hidden" style="aspect-ratio: 1/1;">
+                                <img src="${spk.img}" 
+                                     class="card-img-top speaker-img" 
+                                     alt="${spk.name}">
+                                <div class="card-img-overlay d-flex align-items-end p-0">
+                                    <div class="w-100 p-3 bg-gradient-dark text-white">
+                                        <small class="fw-bold text-gold-accent text-uppercase" style="font-size: 0.65rem;">${spk.role}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-body text-center d-flex flex-column p-4">
+                                <h5 class="fw-bold mb-1 text-dark">${spk.name}</h5>
+                                <p class="small text-muted mb-4 flex-grow-1">${spk.institution || ''}</p>
+                                
+                                <div class="d-grid">
+                                    <a href="/speakers/${slug}/" class="btn btn-outline-maroon rounded-pill fw-bold py-2">
+                                        View Profile
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+                out;
+            </template>
+        </div>
+    </div>
+</section>
+
+<style webc:nokeep>
+    :root {
+        --uls-maroon: #800000;
+        --uls-gold: #d4af37;
+    }
+
+    .ls-2 { letter-spacing: 2px; }
+    .text-maroon { color: var(--uls-maroon) !important; }
+    .text-gold-accent { color: var(--uls-gold) !important; }
+
+    .heading-font {
+        font-family: 'Playfair Display', serif;
+    }
+
+    /* Speaker Card Styles */
+    .speaker-card {
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-radius: 15px;
+    }
+
+    .speaker-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    }
+
+    .speaker-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .speaker-card:hover .speaker-img {
+        transform: scale(1.1);
+    }
+
+    /* Gradient Overlay */
+    .bg-gradient-dark {
+        background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    }
+
+    /* Button Styling */
+    .btn-outline-maroon {
+        border: 2px solid var(--uls-maroon);
+        color: var(--uls-maroon);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    .btn-outline-maroon:hover {
+        background: var(--uls-maroon);
+        color: white !important;
+        box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .display-4 { font-size: 2.5rem; }
+    }
+</style>

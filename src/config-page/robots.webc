@@ -1,0 +1,11 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+layout: false
+---
+<script webc:type="js">
+`User-agent: *
+Allow: /
+
+Sitemap: ${metadata.url}/sitemap.xml`
+</script>

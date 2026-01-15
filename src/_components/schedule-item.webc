@@ -1,0 +1,126 @@
+<div class="accordion-item schedule-item" webc:if="item">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                :data-bs-target="'#item-' + slugify(item.title)">
+            <div class="d-flex align-items-center w-100 justify-content-between pe-3">
+                <div class="d-flex align-items-center flex-wrap">
+                    
+                    <template webc:type="js" webc:raw>
+                        const allSpeakers = (speakers && speakers.list) ? speakers.list : [];
+                        const eventSpeakers = Array.isArray(item.speaker) ? item.speaker : [];
+                        let avs = '';
+                        
+                        eventSpeakers.forEach(entry => {
+                            // entry adalah { name: "...", type: "..." }
+                            const detail = allSpeakers.find(s => s.name === entry.name);
+                            // Tampilkan avatar di header hanya jika dia Keynote/Plenary di sesi ini
+                            if(detail && (entry.type === 'keynote' || entry.type === 'plenary')) {
+                                avs += `<img src="${detail.img}" class="rounded-circle me-2 border border-maroon shadow-sm" 
+                                         style="width: 28px; height: 28px; object-fit: cover;" 
+                                         alt="${detail.name}" title="${entry.type}: ${detail.name}">`;
+                            }
+                        });
+                        avs;
+                    </template>
+
+                    <span class="me-3 fw-bold time-text small" @raw="item.time"></span>
+                    <strong class="fw-bold" @text="item.title"></strong>
+                </div>
+
+                <div :id="'status-' + slugify(item.title)" 
+                     class="status-badge badge border border-maroon text-maroon small ms-2"
+                     :data-start="item.start.date + 'T' + item.start.time"
+                     :data-end="item.end.date + 'T' + item.end.time">
+                     ---
+                </div>
+            </div>
+        </button>
+    </h2>
+
+    <div :id="'item-' + slugify(item.title)" class="accordion-collapse collapse" data-bs-parent="#designSchedule">
+        <div class="accordion-body">
+            <div class="mb-3 text-secondary description-text" @raw="md(item.description)"></div>
+            <div class="mb-3 small p-3 bg-light border-start border-4 border-maroon" @raw="md(item.content)"></div>
+            
+            <template webc:type="js" webc:raw>
+                const allSpeakers = (speakers && speakers.list) ? speakers.list : [];
+                const eventSpeakers = Array.isArray(item.speaker) ? item.speaker : [];                
+                let output = '<div class="row g-3">'; 
+
+                if (eventSpeakers.length > 0) {
+                    eventSpeakers.forEach(entry => {
+                        const detail = allSpeakers.find(s => s.name === entry.name);
+                        if (detail) {
+                            const slug = slugify(detail.name);
+                            output += `
+                            <div class="col-md-6">
+                                <a href="/speakers/${slug}/" class="text-decoration-none">
+                                    <div class="card h-100 border-0 bg-white shadow-sm hover-lift transition-all">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="position-relative">
+                                                    <img src="${detail.img}" class="rounded-circle border border-2 border-white shadow-sm" 
+                                                         style="width: 55px; height: 55px; object-fit: cover;">
+                                                    <span class="position-absolute bottom-0 end-0 badge rounded-pill bg-maroon border border-white" 
+                                                          style="font-size: 0.5rem; padding: 0.2rem 0.3rem;">★</span>
+                                                </div>
+                                                <div class="ms-3 overflow-hidden">
+                                                    <small class="d-block text-maroon fw-bold text-uppercase mb-1" style="font-size: 0.6rem; letter-spacing: 0.5px;">
+                                                        ${entry.type} Speaker
+                                                    </small>
+                                                    <h6 class="mb-0 fw-bold text-dark text-truncate" style="font-size: 0.95rem;">${detail.name}</h6>
+                                                    <div class="small text-muted text-truncate" style="font-size: 0.75rem;">${detail.institution}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>`;
+                        }
+                    });
+                }
+                output += '</div>';
+
+                const eventLink = `/events/${slugify(item.title)}/`;
+                output += `
+                <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
+                    <span class="small text-muted italic" style="font-size: 0.75rem;">Click card to view speaker profile</span>
+                    <a href="${eventLink}" class="btn btn-sm btn-dark px-4 rounded-pill fw-bold text-decoration-none shadow-sm">
+                        View Session Article <i class="fas fa-chevron-right ms-1" style="font-size: 0.7rem;"></i>
+                    </a>
+                </div>`;
+                
+                output;
+            </template>
+        </div>
+    </div>
+</div>
+
+    <script webc:nokeep>
+    (function() {
+        window.updateScheduleStatuses = () => {
+            const badges = document.querySelectorAll('.status-badge');
+            if (badges.length === 0) return;
+            const now = new Date().getTime();
+            badges.forEach(el => {
+                const start = new Date(el.dataset.start).getTime();
+                const end = new Date(el.dataset.end).getTime();
+                if (isNaN(start) || isNaN(end)) return;
+                if (now >= start && now <= end) {
+                    el.innerText = "● LIVE NOW";
+                    el.className = "status-badge badge bg-success text-white ms-2 animate-pulse";
+                } else if (now < start) {
+                    el.innerText = "UPCOMING";
+                    el.className = "status-badge badge border border-maroon text-maroon small ms-2";
+                } else {
+                    el.innerText = "CONCLUDED";
+                    el.className = "status-badge badge bg-secondary text-white ms-2";
+                }
+            });
+        };
+        window.updateScheduleStatuses();
+        if (window.scheduleInterval) clearInterval(window.scheduleInterval);
+        window.scheduleInterval = setInterval(window.updateScheduleStatuses, 60000);
+    })();
+    </script>
+</div>

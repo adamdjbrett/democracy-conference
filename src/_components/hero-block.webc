@@ -1,0 +1,35 @@
+<section class="hero-section text-center">
+    <div class="container">
+        <span class="text-uppercase fw-bold ls-2 gold-text" @raw="subtitle"></span>
+        <h1 class="hero-title mt-3" @raw="title"></h1>
+        <p class="lead mx-auto mb-5 description" @raw="description"></p>
+        <div class="d-flex justify-content-center gap-3">
+            <a :href="link" class="btn-register text-uppercase" @raw="cta"></a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #f8f9fa 0%, var(--uls-cream) 100%);
+        padding: 120px 0;
+        border-bottom: 5px solid var(--uls-gold);
+    }
+    .hero-title { font-size: clamp(2.5rem, 8vw, 4rem); color: var(--uls-maroon); margin-bottom: 1.5rem; }
+    .gold-text { color: var(--uls-gold); letter-spacing: 2px; }
+    .description { max-width: 700px; }
+    .btn-register {
+        background-color: var(--uls-maroon);
+        color: white;
+        padding: 15px 40px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        border: 2px solid var(--uls-maroon);
+        transition: 0.4s;
+        text-decoration: none;
+    }
+    .btn-register:hover {
+        background-color: transparent;
+        color: var(--uls-maroon);
+    }
+</style>

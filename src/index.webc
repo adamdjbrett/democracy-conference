@@ -1,0 +1,171 @@
+---
+layout: "layouts/base.webc"
+---
+
+<hero-block 
+webc:nokeep
+    :subtitle="design.hero.subtitle" 
+    :title="design.hero.title" 
+    :description="design.hero.description"
+    :cta="design.hero.cta_text"
+    :link="design.hero.cta_link">
+</hero-block>
+
+
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="text-uppercase fw-bold lead" @raw="design.about.vision"></h2>
+                <h3 class="display-5 fw-bold mb-4" @raw="md(design.about.title)"></h3>
+                <div class="rich-text lead" @raw="md(design.about.content)"></div>
+            </div>
+            <div class="col-md-5 offset-md-1">
+                <div class="p-4 border-start border-4 about-quote">
+                    <p class="fst-italic mb-0" @raw="md(design.about.quote)"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<register :@design="design"></register>
+
+<section id="schedule" class="py-5 bg-white" webc:if="event && event.schedule">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold display-5" 
+        @raw="event.schedule_title || 'Event Schedule'"></h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="accordion accordion-flush shadow-sm" id="designSchedule">
+                    <schedule-item 
+                        webc:for="entry of event.schedule.filter(e => {
+                            const now = new Date();
+                            if(!e.end || !e.end.date) return true;
+                            return new Date(e.end.date + 'T' + e.end.time) >= now;
+                        })" 
+                        webc:nokeep
+                        :@item="entry" 
+                        :@speakers="speakers">
+                    </schedule-item>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<register :@design="design" webc:nokeep></register>
+
+<!-- 
+<section id="press" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Latest Press Release</h2>
+        <div class="row g-4">
+        <press-card 
+                webc:for="post of collections.press"
+                webc:nokeep
+                :type="post.data.type"
+                :tags="post.data.tags"
+                :title="post.data.title"
+                :image="post.data.image"
+                :description="post.data.description"
+                :date="post.date"
+                :url="post.url">
+            </press-card>
+        </div>
+    </div>
+</section>
+-->
+
+<section id="hotels" class="py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Official Accommodations</h2>
+        <div class="row g-4">
+            <hotel-card webc:for="h of hotels.list" webc:nokeep
+                :name="h.name" :desc="h.desc" :image="h.image" :link="h.link">
+            </hotel-card>
+        </div>
+    </div>
+</section>
+
+<contact-regist :@design="design" webc:nokeep></contact-regist>
+
+<!--
+<section id="speakers" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold mb-5">Conference Speakers</h2>
+        <div class="row">
+            <template webc:if="collections.speakers && collections.speakers.length > 0" webc:nokeep>
+                <div webc:for="spk of collections.speakers" class="col-md-4 mb-4">
+                    <article class="speaker-card text-center">
+                        <a :href="spk.url" class="text-decoration-none text-dark">
+                            <div class="speaker-img-wrapper">
+                                <img :src="spk.data.image" class="speaker-img shadow" :alt="spk.data.title">
+                            </div>
+                            <h3 class="fw-bold h4 mb-1" @text="spk.data.title"></h3>
+                        </a>
+                        <p class=" small text-uppercase mb-2" @text="spk.data.about"></p>
+                    </article>
+                </div>
+            </template>
+
+            <template webc:else webc:nokeep>
+                <div webc:for="spk of speakers.list" class="col-md-4 mb-4">
+                    <article class="speaker-card text-center">
+                        <a :href="'/speakers/' + slugify(spk.name) + '/'" class="text-decoration-none text-dark">
+                            <div class="speaker-img-wrapper">
+                                <img :src="spk.img" class="speaker-img shadow" :alt="spk.name">
+                            </div>
+                            <h3 class="fw-bold h4 mb-1" @text="spk.name"></h3>
+                        </a>
+                        <p class=" small text-uppercase mb-2" @text="spk.role"></p>
+                    </article>
+                </div>
+            </template>
+        </div>
+    </div>
+</section>
+-->
+
+<style webc:nokeep>
+    .about-quote { border-color: var(--uls-gold) !important; background: var(--uls-cream); }
+    .bg-cream { background-color: var(--uls-cream); }
+    .border-maroon-dashed { border: 2px dashed var(--uls-maroon) !important; }
+        .bg-maroon { background-color: #800000 !important; color: white !important; }
+    .schedule-item { 
+        border-left: 4px solid #d4af37 !important; 
+        margin-bottom: 8px; 
+        border-right: 1px solid #dee2e6 !important;
+        border-top: 1px solid #dee2e6 !important;
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+    .accordion-button:not(.collapsed) {
+        background-color: #800000 !important;
+        color: white !important;
+    }
+    .accordion-button:not(.collapsed) . {
+        color: rgba(255,255,255,0.7) !important;
+    }
+    #designSchedule {
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #eee;
+    }
+    .text-maroon { color: #800000 !important; }
+    .bg-maroon { background-color: #800000 !important; color: white !important; }
+    .border-maroon { border-color: #800000 !important; }
+    
+    @keyframes pulse-live {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+    .animate-pulse {
+        animation: pulse-live 2s infinite;
+    }
+</style>

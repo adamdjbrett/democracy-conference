@@ -1,0 +1,122 @@
+---js
+{
+  layout: "layouts/base.webc"
+}
+---
+<article class="press-post-wrapper py-5 mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/press/" class="text-maroon text-decoration-none">Press</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" @text="type"></li>
+                    </ol>
+                </nav>
+
+                <h1 class="display-4 fw-bold heading-font mb-3 text-dark" @text="title"></h1>
+               <img class="img-posts" :alt="title" :src="image" />
+                <div class="d-flex align-items-center gap-3 mb-5 pb-4 border-bottom">
+                    <div class="d-flex align-items-center text-muted small">
+                        <i class="far fa-calendar-alt me-2 text-gold"></i>
+                        <span @text="date.toDateString()"></span>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="d-flex gap-2">
+                         <template webc:type="11ty" 11ty:type="njk">
+                            {% for tag in tags %}
+                                {% if tag != "press" %}
+                                    <span class="badge bg-light text-maroon border border-maroon-subtle">#{{ tag }}</span>
+                                {% endif %}
+                            {% endfor %}
+                        </template>
+                    </div>
+                </div>
+
+                <p class="lead fw-semibold text-secondary mb-5 ps-4 border-start border-4 border-gold" @text="description"></p>
+
+                <div class="press-content rich-text mb-5" @raw="content"></div>
+
+                <div class="bg-light p-4 rounded-4 d-flex justify-content-between align-items-center shadow-sm">
+                    <span class="fw-bold text-maroon">Share this story:</span>
+                    <div class="d-flex gap-3">
+        <a :href="'https://twitter.com/intent/tweet?url=' + encodeURIComponent(metadata.url + page.url)" class="text-dark shadow-hover">
+            <template webc:type="js" webc:raw>renderIcon("fab", "x-twitter")</template>
+        </a>
+
+        <a :href="'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(metadata.url + page.url)" class="text-dark shadow-hover">
+            <template webc:type="js" webc:raw>renderIcon("fab", "facebook")</template>
+        </a>
+
+        <a :href="'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(metadata.url + page.url)" class="text-dark shadow-hover">
+            <template webc:type="js" webc:raw>renderIcon("fab", "linkedin")</template>
+        </a>
+    </div>
+                </div>
+                            <div class="row g-4 mt-5 border-top pt-5">
+    <template webc:type="11ty" 11ty:type="njk">
+        {% set previousPost = collections.press | getPreviousCollectionItem(page) %}
+        {% set nextPost = collections.press | getNextCollectionItem(page) %}
+
+        <div class="col-sm-6 text-start">
+            {% if previousPost %}
+            <a href="{{ previousPost.url }}" class="nav-card p-4 rounded-4 text-decoration-none d-block h-100 shadow-sm">
+                <small class="text-uppercase text-gold fw-bold mb-2 d-block ls-2">&larr; Previous</small>
+                <h5 class="text-dark mb-0 fw-bold line-clamp-2">{{ previousPost.data.title }}</h5>
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="col-sm-6 text-end">
+            {% if nextPost %}
+            <a href="{{ nextPost.url }}" class="nav-card p-4 rounded-4 text-decoration-none d-block h-100 shadow-sm">
+                <small class="text-uppercase text-gold fw-bold mb-2 d-block ls-2">Next &rarr;</small>
+                <h5 class="text-dark mb-0 fw-bold line-clamp-2">{{ nextPost.data.title }}</h5>
+            </a>
+            {% endif %}
+        </div>
+    </template>
+</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<style webc:nokeep>
+    .text-maroon { color: var(--uls-maroon) !important; }
+    .text-gold { color: var(--uls-gold) !important; }
+    .border-maroon-subtle { border-color: rgba(128, 0, 0, 0.2) !important; }
+    .border-gold { border-color: var(--uls-gold) !important; }
+    
+    .press-content {
+        line-height: 1.8;
+        font-size: 1.15rem;
+    }
+    .press-content p { margin-bottom: 1.5rem; }
+    .press-content img {
+        border-radius: 12px;
+        margin: 2rem 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .nav-card {
+        background: #fff;
+        border: 1px solid #eee;
+        transition: all 0.3s ease;
+    }
+    .nav-card:hover {
+        border-color: var(--uls-maroon);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(128, 0, 0, 0.08) !important;
+    }
+    .nav-card:hover h5 {
+        color: var(--uls-maroon) !important;
+    }
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .ls-2 { letter-spacing: 2px; font-size: 0.7rem; }
+    .img-posts {width:100%; height: 220px; border-radius:20px; margin-bottom:25px; object-fit:cover;}
+</style>
