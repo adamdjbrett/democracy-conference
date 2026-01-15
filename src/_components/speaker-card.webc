@@ -1,0 +1,30 @@
+<div class="col-md-4 mb-4">
+    <article class="speaker-card text-center">
+        <a :href="spk.url" class="text-decoration-none text-dark">
+            <div class="speaker-img-wrapper">
+                <img :src="spk.data.image" class="speaker-img" :alt="spk.data.title">
+            </div>
+            <h3 class="fw-bold h4 mb-1" @text="spk.data.title"></h3>
+        </a>
+        <p class="text-muted small text-uppercase mb-2" @text="spk.data.about"></p>
+        <div class="rich-text px-3 small fst-italic text-muted" @text="spk.data.description"></div>
+    </article>
+</div>
+
+<style webc:nokeep>
+    .speaker-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .speaker-card:hover { transform: translateY(-10px); }
+    .speaker-img-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+    }
+    .speaker-img-wrapper::after {
+        content: "";
+        position: absolute;
+        top: 10px; right: -10px; bottom: -10px; left: 10px;
+        border: 2px solid var(--uls-gold);
+        z-index: -1;
+    }
+    .speaker-img { width: 220px; height: 280px; object-fit: cover; filter: grayscale(20%); background-color: #eee; }
+</style>

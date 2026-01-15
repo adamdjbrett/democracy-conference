@@ -1,0 +1,18 @@
+title: "ULS International Conference 2026"
+description: "Exploring the intersections of faith, theology, and modern society."
+url: "http://localhost:8080"
+language: "en"
+locale: "en_US"
+favicon: "https://placehold.co/20"
+image: "https://placehold.co/1200x630"
+
+author:
+  name: "ULS Committee"
+  email: "contact@uls-conference.org"
+  ur;: "https://author.com"
+
+metasocial: 
+  facebook: "https://facebook.com/user"
+  twitter: "https://x.com/user"
+  tweet_user: "@user"
+

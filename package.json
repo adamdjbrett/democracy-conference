@@ -1,0 +1,53 @@
+{
+  "name": "11ty-spa",
+  "version": "1.0.0",
+  "description": "11ty spa by adamdjbrett",
+  "license": "MIT",
+  "author": "AdamDjbrett",
+  "type": "module",
+  "main": "eleventy.config.js",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "cross-env NODE_ENV=production eleventy",
+    "debug": "DEBUG=Eleventy* eleventy",
+    "convert": "node scripts/zetta-converter.js",
+    "clean": "rimraf dist",
+    "cms:export": "node generate-cms.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/adamdjbrett/democracy-conference.git"
+  },
+  "keywords": [],
+  "author": "adamdjbrett <infog@adamdjbrett.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/adamdjbrett/democracy-conference#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-navigation": "^1.0.5",
+    "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "@11ty/eleventy-plugin-webc": "^0.11.2",
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "clean-css": "^5.3.3",
+    "cross-env": "^10.1.0",
+    "js-yaml": "^4.1.1",
+    "markdown-it": "^14.1.0",
+    "purgecss": "^7.0.2",
+    "terser": "^5.44.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "axios": "^1.13.2",
+    "csv-parse": "^6.1.0",
+    "csvtojson": "^2.0.14",
+    "dotenv": "^17.2.3",
+    "exceljs": "^4.4.0",
+    "googleapis": "^170.0.0",
+    "mammoth": "^1.11.0",
+    "pdf-parse": "^2.4.5",
+    "slugify": "^1.6.6",
+    "xlsx": "^0.18.5"
+  }
+}

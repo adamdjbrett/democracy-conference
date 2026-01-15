@@ -1,0 +1,33 @@
+<div class="accordion" id="scheduleAccordion">
+  <div v-for="(item, index) in schedules" class="accordion-item">
+    <h2 class="accordion-header" :id="'heading' + index">
+      <button class="accordion-button collapsed" type="button" 
+      data-bs-toggle="collapse" :data-bs-target="'#collapse' + index">
+        <span class="fw-bold me-3" @text="item.time"></span>
+        <span @text="item.title"></span>
+      </button>
+    </h2>
+    <div :id="'collapse' + index" class="accordion-collapse collapse" 
+    data-bs-parent="#scheduleAccordion">
+      <div class="accordion-body">
+        <p @raw="item.description"></p>        
+        <div v-if="item.speaker_sort" class="mt-3 p-3 bg-light rounded">
+          <script webc:type="js">
+            const speaker = speakers.find(s => String(s.sort) === String(item.speaker_sort));
+            if (speaker) {
+              `
+              <div class="d-flex align-items-center">
+                <img src="${speaker.img}" class="rounded-circle me-3" width="40">
+                <div>
+                  <strong class="d-block">${speaker.name}</strong>
+                  <div class="small text-muted">${speaker.bio}</div>
+                </div>
+              </div>
+              `;
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

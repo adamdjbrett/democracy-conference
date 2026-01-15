@@ -1,0 +1,63 @@
+info: "Expertise & Vision"
+title: "World-Class Speakers"
+text: Meet the thought leaders and innovators of Speakers 2026.
+
+list:
+  - name: "Dr. Raymond Vance"
+    id: "raymond-vance"
+    sort: "01"
+    role: "Dean of Students"
+    institution: "ULS Graduate School"
+    img: "https://i.pravatar.cc/300?u=a1"
+    bio: |
+      Specializing in <u>systematic theology</u> and <strong>modern ethics</strong>.
+    content: |
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki
+    links:
+      - name: "linkedin"
+        icon: "linkedin"
+        url: "https://linkedin.com/in/raymondvance"
+      - name: "website"
+        icon: "globe"
+        url: "https://example.edu"
+
+  - name: "Prof. Sarah Jenkins"
+    id: "sarah-jenkins"
+    sort: "02"
+    role: "Historian"
+    institution: "Heritage Institute"
+    img: "https://i.pravatar.cc/300?u=a2"
+    bio: |
+      Focuses on <em>Lutheran Heritage</em> and global academic discourse.
+    content:  |
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki, 
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki, 
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki, 
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki, 
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki, 
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki, 
+    links:
+      - name: "linkedin"
+        icon: "linkedin"
+        url: "https://linkedin.com/in/raymondvance"
+      - name: "website"
+        icon: "globe"
+        url: "https://example.edu"
+
+  - name: "Delbaso"
+    id: "delbaso"
+    sort: "02"
+    role: "Historian"
+    institution: "Delbaso Institute"
+    img: "https://i.pravatar.cc/300?u=a5"
+    bio: |
+      Focuses on <em>Lutheran Heritage</em> and global academic discourse.
+    content:  |
+        Lorep ipsum dolor siamet amet jabang bayi lanang wedok temenan toh iki
+    links:
+      - name: "linkedin"
+        icon: "linkedin"
+        url: "https://linkedin.com/in/raymondvance"
+      - name: "website"
+        icon: "globe"
+        url: "https://example.edu"

@@ -1,0 +1,22 @@
+<section id="contact" class="py-5 bg-cream">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <h2 class="fw-bold mb-4" @raw="design.contact.title"></h2>
+                </div>
+                <div class="col-md-8">
+                <p class="mb-4" @raw="design.contact.text"></p>
+                <div class="rich-text">
+                    <p webc:for="item of design.contact.list">
+                        <strong @raw="item.name + ': '"></strong>
+                        <a :href="item.link" @raw="item.text"></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style webc:nokeep>
+    .bg-cream { background-color: var(--uls-cream) !important; }
+</style>

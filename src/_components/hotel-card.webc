@@ -1,0 +1,28 @@
+<div class="col-md-4">
+    <div class="card p-4 h-100">
+        <h3 class="h5 fw-bold" @raw="name"></h3>
+        <img :src="image" 
+        width="400" 
+        class="hotel-photo"
+        height="250"  
+        :alt="name" 
+         loading="lazy" 
+         webc:keep>
+        <div class="mb-3 small" @html="desc"></div>
+        <a :href="link" class="btn btn-sm btn-dark">Book Now</a>
+    </div>
+</div>
+
+<style webc:nokeep>
+    .custom-card { 
+        border: 1px solid #eee; 
+        transition: 0.3s; 
+        border-radius: 0; 
+        height: 100%; 
+    }
+    .custom-card:hover { 
+        border-color: var(--uls-gold); 
+        background-color: var(--uls-cream); 
+    }
+    .hotel-photo {object-fit: cover; aspect-ratio: 400/250;}
+</style>

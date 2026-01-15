@@ -1,0 +1,9 @@
+list:
+  - name: "Seminary Ridge Inn"
+    image: "https://placehold.co/600x400/png?text=Hotel Modern"
+    desc: "Special rate for conference attendees. <u>2 mins walk</u> to venue."
+    link: "/about/"
+  - name: "The Heritage Hotel"
+    image: "https://placehold.co/600x400/png?text=Hotel Heritage"
+    desc: "Luxury suites with historical views. <strong>Shuttle included</strong>"
+    link: "/about/"

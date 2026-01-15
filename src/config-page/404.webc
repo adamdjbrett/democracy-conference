@@ -1,0 +1,90 @@
+---js
+{
+  "title": "Page Not Found - Zetta Core",
+  "permalink": "/404.html",
+  "layout": "layouts/base.webc",
+  "eleventyExcludeFromCollections": true
+}
+---
+<section class="min-vh-100 d-flex align-items-center py-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-7">
+                <div class="error-visual mb-5">
+                    <h1 class="display-1 fw-bold text-maroon heading-font mb-0" style="font-size: 8rem; opacity: 0.1;">404</h1>
+                    <div class="position-relative mt-n5">
+                        <template webc:type="js" webc:raw>
+                            renderIcon('fas', 'exclamation-triangle', 'text-gold display-4 mb-3');
+                        </template>
+                        <h2 class="h1 fw-bold text-dark heading-font">Lost in the Core?</h2>
+                    </div>
+                </div>
+
+                <div class="error-message mb-5">
+                    <p class="lead text-muted mx-auto" style="max-width: 500px;">
+                        The page you are looking for might have been moved, deleted, or perhaps the session has evolved beyond this URI.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="/" class="btn btn-maroon px-5 py-3 rounded-pill shadow-maroon fw-bold">
+                        <template webc:type="js" webc:raw>renderIcon('fas', 'home', 'me-2');</template>
+                        Return Home
+                    </a>
+                    <a href="/events/" class="btn btn-outline-dark px-5 py-3 rounded-pill fw-bold">
+                        <template webc:type="js" webc:raw>renderIcon('fas', 'calendar-alt', 'me-2');</template>
+                        View Schedule
+                    </a>
+                </div>
+
+                <div class="mt-5 pt-5">
+                    <p class="small text-muted text-uppercase ls-2">
+                        System Status: <span class="text-success fw-bold">Operational</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style webc:nokeep>
+    :root {
+        --uls-maroon: #800000;
+        --uls-gold: #d4af37;
+    }
+
+    .heading-font { font-family: 'Playfair Display', serif; }
+    .text-maroon { color: var(--uls-maroon) !important; }
+    .text-gold { color: var(--uls-gold) !important; }
+    .ls-2 { letter-spacing: 2px; }
+
+    .mt-n5 { margin-top: -4rem !important; }
+
+    .btn-maroon {
+        background: var(--uls-maroon);
+        border: none;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .btn-maroon:hover {
+        background: #600000;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(128, 0, 0, 0.2);
+        color: white;
+    }
+
+    .shadow-maroon {
+        box-shadow: 0 4px 14px 0 rgba(128, 0, 0, 0.2);
+    }
+
+    /* Minimalist Animation */
+    .error-visual {
+        animation: slideUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>

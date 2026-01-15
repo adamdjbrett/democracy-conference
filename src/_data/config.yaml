@@ -1,0 +1,63 @@
+# NAVIGATION
+nav:
+  brand: "11ty SPA"
+  logo: "https://placehold.co/40"
+  links:
+    - name: "Home"
+      url: "/"
+    - name: "About"
+      url: "/about/"
+    - name: "Events"
+      url: "/events/"
+    - name: "Press"
+      url: "/press/"
+    - name: "Speakers"
+      url: "/speakers/"
+    - name: "Contact"
+      url: "/contact/"
+  button:
+    text: "Register"
+    url: "https://ulsforms.wufoo.com/forms/q18pafoo1rjzis3/?fbclid=IwY2xjawOpM7lleHRuA2FlbQIxMABicmlkETEzVldMaDhqeEROTzJsSHVGc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHvHBgIoYaOsLeaxkZTLC5bfCxqehBPAN17ijE8WJCE7RFMgjbpbX4eZRzQK5_aem_pWEZlGNuNCxWVo0X_JgQng"
+
+# FOOTER
+footer:
+  logo: "https://cdn.prod.website-files.com/63c09dbb6016a03e094c290c/63fb8c2ae521f2581dced4fb_uls-logo.png"
+  brand: "11ty SPA"
+  address: "123 Seminary Ridge, Philadelphia, PA 19119"
+  phone: 
+    number: "+12345678"
+    url: "tel:+12345678"
+  email: 
+    address: "hello@mail.com"
+    url: "mailto:hello@mail.com"
+  sponsor_name: "United Lutheran Seminary"
+  sponsor_url: "https://www.unitedlutheranseminary.edu/"
+  copyright: "&copy; Core - All Rights Reserved."
+  social: 
+    - name: "Facebook"
+      url: "https://facebook.com/user"
+      icon: "fab fa-facebook-f"
+    - name: "Twitter"
+      url: "https://x.com/user"
+      icon: "fab fa-x-twitter"
+
+
+# CONTACT PAGE AND CONTACT FORM
+contact_form:
+  title: "Contact Us"
+  formspree_id: "https://formspree.io/f/your-form-id"
+  info: "Get in touch with 11ty SPA"
+  section: "Support Channels"
+  contact_details:
+    - name: "Email Inquiry"
+      value: "hello@mail.com"
+      icon: "fas fa-envelope"
+      url: "mailto:hello@mail.com"
+    - name: "Phone"
+      value: "+12345678"
+      icon: "fas fa-phone"
+      url: "tel:+12345678"
+    - name: "Headquarters"
+      value: "123 Seminary Ridge, Philadelphia, PA 19119"
+      icon: "fas fa-map-marker-alt"
+      url: "https://www.google.com/maps"

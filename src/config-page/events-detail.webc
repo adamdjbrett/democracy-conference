@@ -1,0 +1,258 @@
+---js
+{
+  pagination: {
+    data: "event.schedule",
+    size: 1,
+    alias: "item",
+    addAllPagesToCollections: true
+  },
+  // URL dibentuk dari title agar SEO friendly
+  permalink: (data) => `/events/${data.slugify(data.item.title)}/index.html`,
+  layout: "layouts/base.webc"
+}
+---
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <a href="/#schedule" class="text-decoration-none 
+                text-muted small">&larr; Back to Schedule</a>
+            </nav>
+            
+            <div class="badge bg-maroon mb-2" @text="item.date"></div>
+            <h1 class="display-4 fw-bold mb-3" @text="item.title"></h1>
+
+            <div webc:if="item.image" class="mb-5">
+    <img :src="item.image" :alt="item.title" 
+         class="img-fluid rounded-4 shadow-lg w-100" 
+         style="max-height: 450px; object-fit: cover;">
+</div>
+
+            <div class="d-flex align-items-center mb-4 text-secondary">
+                <i class="far fa-clock me-2"></i>
+                <span @text="item.time"></span>
+            </div>
+
+            <div class="lead mb-5 pb-4 border-bottom" @text="item.description"></div>
+
+<div id="countdown-card" class="p-4 rounded-4 shadow-sm mb-5 text-center bg-maroon-premium" 
+     :data-start="item.start.date + 'T' + item.start.time"
+     :data-end="item.end.date + 'T' + item.end.time" webc:keep>
+    
+    <h6 id="status-label" class="fw-bold ls-2 text-uppercase mb-4 text-gold-soft small">Checking Status...</h6>
+    
+    <div id="timer-display" class="d-flex justify-content-center gap-2 gap-md-3 mb-2">
+        <div class="timer-unit-box">
+            <span id="d-days" class="h2 fw-bold d-block text-white mb-0">00</span>
+            <small class="timer-label">DAYS</small>
+        </div>
+        <div class="timer-unit-box">
+            <span id="d-hours" class="h2 fw-bold d-block text-white mb-0">00</span>
+            <small class="timer-label">HRS</small>
+        </div>
+        <div class="timer-unit-box">
+            <span id="d-mins" class="h2 fw-bold d-block text-white mb-0">00</span>
+            <small class="timer-label">MINS</small>
+        </div>
+        <div class="timer-unit-box">
+            <span id="d-secs" class="h2 fw-bold d-block text-white mb-0">00</span>
+            <small class="timer-label">SECS</small>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 mb-5">
+    <div class="card border-0 shadow-sm bg-light rounded-4">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-3 d-flex align-items-center">
+                <i class="fas fa-list-ul me-2 text-maroon"></i> <span @text="event.agenda"></span>
+            </h5>
+            <div class="agenda-list" @raw="md(item.list)"></div>
+        </div>
+    </div>
+</div>
+
+            <div class="mt-5">
+    <h4 class="fw-bold mb-3"  @text="event.session"></h4>
+    <template webc:type="js" webc:raw>
+        const list = (this.speakers && this.speakers.list) ? this.speakers.list : [];
+        
+        /* Event Data: schedule.yaml (Array of objects {name, type}) */
+        const eventSpeakers = Array.isArray(item.speaker) ? item.speaker : [];
+        
+        let out = '<div class="row g-3">';
+        
+        if (eventSpeakers.length > 0) {
+            eventSpeakers.forEach(entry => {
+                const spk = list.find(s => s.name === entry.name);
+                
+                if(spk) {
+                    const slug = slugify(spk.name);
+                    out += `
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center p-3 border rounded shadow-sm bg-white hover-lift transition-all">
+                            <div class="position-relative">
+                                <img src="${spk.img}" class="rounded-circle me-3 border border-2 border-light" 
+                                     style="width: 64px; height: 64px; object-fit: cover;" alt="${spk.name}">
+                                ${entry.type ? `<span class="position-absolute bottom-0 end-0 badge rounded-pill bg-maroon border border-white" 
+                                      style="font-size: 0.5rem; padding: 0.2rem 0.35rem;">★</span>` : ''}
+                            </div>
+                            <div class="overflow-hidden">
+                                <small class="d-block text-maroon fw-bold text-uppercase mb-1" style="font-size: 0.65rem; letter-spacing: 0.5px;">
+                                    ${entry.type || 'Speaker'}
+                                </small>
+                                <a href="/speakers/${slug}/" class="fw-bold d-block text-dark text-decoration-none text-truncate" style="font-size: 1.1rem;">
+                                    ${spk.name}
+                                </a>
+                                <div class="text-muted small text-truncate">${spk.institution || spk.role}</div>
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            });
+        } else {
+            out += '<div class="col-12"><p class="text-muted italic">No speakers assigned to this session.</p></div>';
+        }
+        
+        out += '</div>';
+        out; 
+    </template>
+</div>
+
+           <h3 class="fw-bold mb-4 mt-5" @text="event.about"></h3>
+            <div class="content shadow-sm p-4 bg-white rounded border" @raw="md(item.content)"></div>
+    <article webc:if="item.article" class="p-3">
+        <h3 class="fw-bold mb-4" @text="event.article"></h3>
+        <div class="prose" @raw="md(item.article)"></div>
+    </article>
+
+
+ <div class="row g-4 mt-5 pt-5 border-top">
+    <template webc:type="11ty" 11ty:type="njk">
+        <div class="col-sm-6 text-start">
+            {% if pagination.href.previous %}
+                {# Ambil item sebelumnya dari pagination data #}
+                {% set prevItem = pagination.page.previous %}
+                {% set prevEndTime = prevItem.end.date + "T" + prevItem.end.time %}
+                
+                {% if prevEndTime < now %}
+                    <div class="nav-card p-4 rounded-4 d-block h-100 opacity-50 border bg-light">
+                        <small class="text-uppercase text-muted fw-bold mb-2 d-block ls-2">&larr; Previous Session</small>
+                        <h5 class="text-muted mb-0 fw-bold">Session Concluded</h5>
+                    </div>
+                {% else %}
+                    <a href="{{ pagination.href.previous }}" class="nav-card p-4 rounded-4 text-decoration-none d-block h-100 shadow-sm border">
+                        <small class="text-uppercase text-gold fw-bold mb-2 d-block ls-2">&larr; Previous Session</small>
+                        <h5 class="text-dark mb-0 fw-bold">Go to Previous</h5>
+                    </a>
+                {% endif %}
+            {% else %}
+                <div class="nav-card p-4 rounded-4 d-block h-100 opacity-50 border bg-light">
+                    <small class="text-uppercase text-muted fw-bold d-block ls-2">First Session</small>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-sm-6 text-end">
+            {% if pagination.href.next %}
+                {# Ambil item berikutnya dari pagination data #}
+                {% set nextItem = pagination.page.next %}
+                {% set nextEndTime = nextItem.end.date + "T" + nextItem.end.time %}
+
+                {% if nextEndTime < now %}
+                     <div class="nav-card p-4 rounded-4 d-block h-100 opacity-50 border bg-light">
+                        <small class="text-uppercase text-muted fw-bold mb-2 d-block ls-2">Next Session &rarr;</small>
+                        <h5 class="text-muted mb-0 fw-bold">Session Concluded</h5>
+                    </div>
+                {% else %}
+                    <a href="{{ pagination.href.next }}" class="nav-card p-4 rounded-4 text-decoration-none d-block h-100 shadow-sm border">
+                        <small class="text-uppercase text-gold fw-bold mb-2 d-block ls-2">Next Session &rarr;</small>
+                        <h5 class="text-dark mb-0 fw-bold">Join Next Topic</h5>
+                    </a>
+                {% endif %}
+            {% else %}
+                <div class="nav-card p-4 rounded-4 d-block h-100 opacity-50 border bg-light">
+                    <small class="text-uppercase text-muted fw-bold d-block ls-2">Last Session</small>
+                </div>
+            {% endif %}
+        </div>
+    </template>
+</div>
+
+</div>
+
+           
+</div>
+</div>
+</div>
+
+<style webc:nokeep>
+:root {
+        --uls-maroon: #800000;
+        --uls-gold: #d4af37;
+    }
+    .ls-2 { letter-spacing: 2px; font-size: 0.7rem; }
+    .nav-card {
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background: white;
+    }
+    .nav-card:not(.bg-light):hover {
+        border-color: var(--uls-maroon) !important;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(128, 0, 0, 0.1) !important;
+    }
+    .text-gold { color: var(--uls-gold); }
+    .text-maroon { color: #800000; }
+    .bg-maroon { background-color: #800000; color: white; }
+        .ls-2 { letter-spacing: 2px; }
+    .bg-maroon-premium {
+        background: linear-gradient(135deg, #800000 0%, #4d0000 100%);
+        border: 1px solid rgba(212, 175, 55, 0.3); /* Border tipis warna gold */
+    }
+
+    /* Warna Teks Status */
+    .text-gold-soft {
+        color: #d4af37;
+        letter-spacing: 3px;
+    }
+
+    /* Kotak Angka Timer (Glass Effect) */
+    .timer-unit-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+        min-width: 80px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .timer-label {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* Override untuk Status Live */
+    .text-success.animate-pulse {
+        color: #2ecc71 !important; /* Hijau terang agar terlihat di background gelap */
+        text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    }
+
+    @keyframes pulse-live {
+        0% { opacity: 1; }
+        50% { opacity: 0.6; }
+        100% { opacity: 1; }
+    }
+
+    @media (max-width: 576px) {
+        .timer-unit-box {
+            padding: 10px;
+            min-width: 65px;
+        }
+        .timer-unit-box span {
+            font-size: 1.5rem;
+        }
+    }
+</style>

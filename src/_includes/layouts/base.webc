@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html :lang="metadata.language">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title @text="speaker?.name || item?.title || title || metadata.title"></title>
+    
+    <meta name="description" :content="speaker?.bio || item?.description || description || metadata.description">
+    
+    <meta property="og:title" :content="speaker?.name || item?.title || title || metadata.title">
+    <meta property="og:description" :content="speaker?.bio || item?.description || description || metadata.description">
+    <meta property="og:image" :content="speaker?.img || item?.img || image || metadata.image">
+    <meta property="og:url" :content="metadata.url + page.url">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" :content="speaker?.name || item?.title || title || metadata.title">
+    <meta name="twitter:description" :content="speaker?.bio || item?.description || description || metadata.description">
+    <meta name="twitter:image" :content="speaker?.img || item?.img || image || metadata.image">
+    
+    <link rel="icon" :href="metadata.favicon" type="image/x-icon">
+    <meta property="og:locale" :content="metadata.locale">
+    <meta property="article:author" :content="metadata.author.url">
+    <meta property="og:see_also" :content="metadata.metasocial.facebook">
+    <meta property="og:see_also" :content="metadata.metasocial.twitter">
+    <link rel="me" :href="metadata.metasocial.twitter">
+    <link rel="me" :href="metadata.metasocial.facebook">
+    <script type="application/ld+json" webc:keep @raw="JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': speaker ? 'Person' : (item?.date ? 'Event' : 'WebPage'),
+  'name': speaker?.name || item?.title || title || metadata.title,
+  'description': (speaker?.bio || item?.description || description || metadata.description || '').replace(/(<([^>]+)>)/gi, ''),
+  'image': speaker?.img || item?.img || image || metadata.image,
+  'url': metadata.url + (page.url || ''),
+  'jobTitle': speaker?.role || undefined,
+  'organizer': {
+    '@type': 'Organization',
+    'name': metadata.author.name,
+    'url': metadata.author.url
+  }
+})"></script>
+
+    <link rel="stylesheet" href="/css/bs.css" webc:keep media="print" onload="this.media='all'">
+<noscript webc:keep><link rel="stylesheet" href="/css/bs.css"></noscript>
+<style webc:nokeep>
+    main#main-content {
+        min-height: 80vh;
+        display: block;
+    }
+    body {
+        font-display: swap;
+    }
+   @font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter.woff2') format('woff2');
+  font-display: swap;
+  /* Menyesuaikan skala font agar identik dengan font fallback sistem */
+  size-adjust: 107%; 
+  ascent-override: 90%;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/fair.woff2') format('woff2');
+  font-display: swap;
+  size-adjust: 94%;
+}
+
+    :root {
+        /* Colors */
+        --uls-maroon: #8C1D2F;
+        --uls-gold: #856440;
+        --uls-cream: #FDFBF7;
+        --uls-dark: #1a1a1a;
+        
+        /* Font Stacks */
+        --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-heading: 'Playfair Display', serif;
+    }
+
+    body { 
+        font-family: var(--font-main); 
+        background-color: white; 
+        color: var(--uls-dark); 
+        overflow-x: hidden; 
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+    }
+main#main-content {
+    /* Sediakan ruang agar footer tidak melompat ke atas saat loading */
+    min-height: 100vh; 
+    display: block;
+    /* Mencegah pergeseran layout selama font dimuat */
+    font-kerning: normal;
+}
+    h1, h2, h3, h4, h5, h6, .navbar-brand { 
+        font-family: var(--font-heading); 
+        font-weight: 700;
+    }
+    img,iframe {max-width:100%;margin-top:1rem;margin-bottom:1rem;}
+    img {
+    height: auto;
+    max-width: 100%
+    display: block;
+    content-visibility: auto;
+}
+
+[webc\:nokeep] {
+    contain-intrinsic-size: auto 500px;
+}
+    /* Utilities */
+    .rich-text u { text-decoration: underline; text-underline-offset: 4px; color: var(--uls-maroon); }
+    .rich-text a { color: var(--uls-maroon); font-weight: 600; }
+    .skip-link { position: absolute; left: -9999px; background: var(--uls-maroon); color: white; padding: 10px; z-index: 9999; }
+    .skip-link:focus { left: 0; }
+</style>
+<link rel="preload" href="/fonts/fair.woff2" as="font" type="font/woff2" crossorigin webc:keep>
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin webc:keep>
+<style @raw="getBundle('css')" webc:keep></style>
+
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <site-nav :@config="config" :@metadata="metadata" webc:nokeep></site-nav>
+    <main id="main-content" @raw="content"></main>
+    <site-footer :@config="config"  webc:nokeep></site-footer>
+    <script src="/js/main.js" webc:keep defer></script>
+    <script webc:keep @raw="jsmin(getBundle('js'))"></script>
+</body>
+</html>

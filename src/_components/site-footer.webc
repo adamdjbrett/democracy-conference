@@ -1,0 +1,51 @@
+<footer class="footer-brand text-center py-5">
+    <div class="container">
+        <h2 class="fw-bold mb-4 h3 text-uppercase" @raw="config.footer.brand"></h2>
+        <p class="mb-2 text-white" @raw="config.footer.address"></p>
+        <p class="mb-4"><a :href="config.footer.email.url" @text="config.footer.email.address" class=" text-white"></a> | <a :href="config.footer.phone.url" @text="config.footer.phone.number" class=" text-white"></a></p>
+       <div class="social-container">
+  <a webc:for="s of config.footer.social" 
+     :href="s.url" 
+     :title="s.name" 
+     class="btn btn-outline-light"
+     target="_blank" 
+     rel="noopener">
+    <template webc:type="js" webc:raw>
+      const parts = s.icon.split(' ');
+      const type = parts[0]; 
+      const name = parts[1].replace('fa-', '');
+      helpers.icon(type, name, 'social-icon-class');
+    </template>
+  </a>
+</div>
+        <img :src="config.footer.logo" alt="Logo" class="mb-4 footer-logo" webc:if="config?.footer.logo" webc:keep>
+        <p class="lead">
+            Sponsored by 
+            <a :href="config.footer.sponsor_url" target="_blank" class="fw-bold text-white text-decoration-underline" @raw="config.footer.sponsor_name"></a>
+        </p>
+    </div>
+</footer>
+<div class="footer-legal text-center text-white py-3">
+    <div class="container small" @raw="config.footer.copyright"></div>
+</div>
+
+<style webc:nokeep>
+    .footer-brand { background-color: var(--uls-maroon); color: white; }
+    .footer-logo { max-height: 80px; filter: brightness(0) invert(1); }
+    .footer-legal { background-color: #721826; }
+    .social-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    width: 100%;
+  }
+  .social-icon-class {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  .social-icon-class:hover {
+    transform: scale(1.2);
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/pretty-feed.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or 'en' }}">
+  <title>{{ metadata.title }}</title>
+  <subtitle>{{ metadata.description }}</subtitle>
+  <link href="{{ metadata.url }}feed.xml" rel="self"/>
+  <link href="{{ metadata.url }}"/>
+  <updated>{{ collections.press | getNewestCollectionItemDate | dateToRfc3339 if collections.press.length else "" }}</updated>
+  <id>{{ metadata.url }}</id>
+  {%- if metadata.author %}
+  <author>
+    <name>{{ metadata.author.name }}</name>
+    <email>{{ metadata.author.email }}</email>
+  </author>
+  {%- endif %}
+  
+  {%- for post in collections.press | reverse %}
+  {%- set absolutePostUrl = metadata.url + post.url %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ absolutePostUrl }}"/>
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ absolutePostUrl }}</id>
+    <summary type="html"><![CDATA[{{ post.data.description | safe }}]]></summary>
+  </entry>
+  {%- endfor %}
+</feed>
